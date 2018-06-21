@@ -1,17 +1,13 @@
-%h2 Log in
-= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
-  .field
-    = f.label :email
-    %br/
-    = f.email_field :email, autofocus: true, autocomplete: "email"
-  .field
-    = f.label :password
-    %br/
-    = f.password_field :password, autocomplete: "off"
-  - if devise_mapping.rememberable?
-    .field
-      = f.check_box :remember_me
-      = f.label :remember_me
-  .actions
-    = f.submit "Log in"
-= render "devise/shared/links"
+- provide(:title, "Log into my.Invoice.r")
+.row
+  .col-md-6.offset-md-3
+    %h1.m-b-2 Log in
+    = bootstrap_form_for(:session, url: user_session_path) do |f|
+      = f.email_field :email, class: 'form-control'
+      = f.password_field :password, class: 'form-control'
+      = f.label :remember_me, class: "checkbox inline" do
+        = f.check_box :remember_me
+        Remember me on this computer
+      .break
+        = f.submit "Log in", class: "btn btn-primary m-t-2"
+        = link_to "New account", new_user_path, class: "btn btn-secondary m-t-2"
